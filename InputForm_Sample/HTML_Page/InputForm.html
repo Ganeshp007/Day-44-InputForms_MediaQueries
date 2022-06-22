@@ -22,6 +22,7 @@
         <div>
             <label for="email">Email input type : </label>
             <input type="email" id="email" name="email" >
+            <error-output class="email-error"></error-output>
         </div>
         <div>
             <label for="url">URL input type : </label>
@@ -57,7 +58,7 @@
         </div>
     </form>
     <script>
-        // UC-1 => Name Regex
+        // UC-1 => Name Validation using Regex Exp
         const text=document.querySelector('#text');
         const textError=document.querySelector('.text-error');
         text.addEventListener('input',function()
@@ -73,6 +74,20 @@
             }
         });
 
+        // UC-2 => Email ID Validation using Regex Exp
+        const emailinput=document.querySelector('#email');
+        const emailerror=document.querySelector('.email-error');
+        email.oninput=function(){
+            const emailRegex=RegExp('^([A-Za-z0-9]{3,20})([.+-_*][A-Za-z0-9]{1,10})*([@][A-Za-z0-9]{1,5})+[.][A-Za-z]{2,3}([.][A-Za-z]{2,3})?$');
+            if(emailRegex.test(emailinput.value))
+            {
+                emailerror.textContent="";
+            }
+            else
+            {
+                 emailerror.textContent="email Id is invalid !!";
+            }
+        }
 
         //For Salary output
         const salary=document.querySelector('#salary');
